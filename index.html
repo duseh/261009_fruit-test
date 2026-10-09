@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>나와 닮은 과일은? | 과일 성향 테스트</title>
+  
+  <!-- Open Graph / SNS 메타 태그 -->
+  <meta property="og:title" content="나와 닮은 과일은? | 과일 성향 테스트">
+  <meta property="og:description" content="10가지 질문으로 알아보는 나의 과일 MBTI 성향! 나는 과연 어떤 달콤새콤한 과일일까요?">
+  <meta property="og:type" content="website">
+
+  <!-- 웹 폰트 (Pretendard) -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  
+  <!-- 스타일시트 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 배경 장식용 둥둥 떠다니는 과일 이모지 -->
+  <div class="bg-fruits-container" aria-hidden="true">
+    <span class="floating-fruit f1">🍎</span>
+    <span class="floating-fruit f2">🍊</span>
+    <span class="floating-fruit f3">🍋</span>
+    <span class="floating-fruit f4">🍇</span>
+    <span class="floating-fruit f5">🍓</span>
+    <span class="floating-fruit f6">🍑</span>
+    <span class="floating-fruit f7">🍍</span>
+    <span class="floating-fruit f8">🫐</span>
+  </div>
+
+  <main class="app-container">
+    <!-- 1. 시작 화면 -->
+    <section id="start-screen" class="screen active">
+      <div class="card intro-card">
+        <div class="badge-pill">🍓 과일 MBTI 성향 테스트 🍋</div>
+        <h1 class="main-title">
+          나와 닮은 과일은<br>
+          <span class="highlight-text">무엇일까요?</span>
+        </h1>
+        <p class="subtitle">
+          달콤상큼 과일 속에서 발견하는 나의 진짜 성향!<br>
+          일상 속 10가지 상황으로 내 안의 과일을 찾아보세요.
+        </p>
+
+        <div class="intro-visual">
+          <div class="fruit-basket">
+            <span class="basket-fruit">🍎</span>
+            <span class="basket-fruit">🍑</span>
+            <span class="basket-fruit main-bounce">🍊</span>
+            <span class="basket-fruit">🍇</span>
+            <span class="basket-fruit">🍓</span>
+          </div>
+        </div>
+
+        <div class="test-info-box">
+          <div class="info-item">
+            <span class="info-icon">⏱️</span>
+            <span>소요 시간 <strong>약 2~3분</strong></span>
+          </div>
+          <div class="info-divider"></div>
+          <div class="info-item">
+            <span class="info-icon">📝</span>
+            <span>총 <strong>10문항</strong> (4지선다)</span>
+          </div>
+        </div>
+
+        <button id="start-btn" class="btn btn-primary btn-bounce">
+          <span>테스트 시작하기</span>
+          <span class="arrow-icon">✨</span>
+        </button>
+
+        <p class="footer-tip">총 16가지 과일 유형이 기다리고 있어요!</p>
+      </div>
+    </section>
+
+    <!-- 2. 질문 화면 -->
+    <section id="question-screen" class="screen">
+      <div class="quiz-header">
+        <button id="prev-btn" class="btn-icon" aria-label="이전 질문으로">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        
+        <div class="progress-wrap">
+          <div class="progress-info">
+            <span class="progress-step" id="progress-text">Q. 01 / 10</span>
+            <span class="progress-percent" id="progress-percent">10%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card question-card" id="question-card">
+        <div class="q-badge" id="q-category">일상 생활</div>
+        <h2 class="question-text" id="question-text">
+          질문 내용이 여기에 표시됩니다.
+        </h2>
+
+        <div class="options-container" id="options-container">
+          <!-- 스크립트에서 동적으로 4개의 선택지 버튼 생성 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 로딩 / 분석 화면 -->
+    <section id="loading-screen" class="screen">
+      <div class="card loading-card">
+        <div class="loading-animation">
+          <div class="loading-fruit-spinner">
+            <span class="spin-item">🍇</span>
+            <span class="spin-item">🍓</span>
+            <span class="spin-item">🍋</span>
+            <span class="spin-item">🍊</span>
+          </div>
+          <div class="pulse-ring"></div>
+        </div>
+        <h3 class="loading-title">당신의 과일 DNA 분석 중...</h3>
+        <p class="loading-desc">새콤달콤한 나의 매력 포인트를 모으고 있어요!</p>
+        <div class="loading-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 결과 화면 -->
+    <section id="result-screen" class="screen">
+      <div class="card result-card" id="result-card">
+        <div class="result-header">
+          <span class="result-mbti-tag" id="res-mbti">MBTI</span>
+          <span class="result-subtitle" id="res-nickname">단단하고 우직한 원칙주의자</span>
+          <h2 class="result-fruit-name" id="res-fruit-name">우직한 사과</h2>
+        </div>
+
+        <div class="result-fruit-visual">
+          <div class="fruit-emoji-glow" id="res-emoji-glow"></div>
+          <div class="fruit-emoji" id="res-emoji">🍎</div>
+        </div>
+
+        <!-- 성향 태그 -->
+        <div class="tags-container" id="res-tags">
+          <!-- 키워드 태그 동적 삽입 -->
+        </div>
+
+        <!-- 성향 탐구서 (불릿 포인트 목록) -->
+        <div class="result-section exploration-section">
+          <h4 class="section-title">
+            <span class="sec-icon">📖</span> 성향 탐구서
+          </h4>
+          <div class="exploration-container" id="res-description">
+            <!-- 자바스크립트에서 불릿 포인트 동적 삽입 -->
+          </div>
+        </div>
+
+        <!-- 과일 케미 (궁합) -->
+        <div class="result-section chemistry-section">
+          <h4 class="section-title">
+            <span class="sec-icon">🤝</span> 과일 환상 & 환장 케미
+          </h4>
+          <div class="chemistry-grid">
+            <!-- 잘 맞는 과일 -->
+            <div class="chem-card best-chem" id="best-chem-card">
+              <span class="chem-label">찰떡궁합 환상의 케미 💚</span>
+              <div class="chem-fruit-info">
+                <span class="chem-emoji" id="res-best-emoji">🍓</span>
+                <div>
+                  <div class="chem-title" id="res-best-name">딸기</div>
+                  <div class="chem-mbti" id="res-best-mbti">ESFP</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 안 맞는 과일 -->
+            <div class="chem-card worst-chem" id="worst-chem-card">
+              <span class="chem-label">조금 주의! 환장의 케미 ⚡</span>
+              <div class="chem-fruit-info">
+                <span class="chem-emoji" id="res-worst-emoji">🍊</span>
+                <div>
+                  <div class="chem-title" id="res-worst-name">오렌지</div>
+                  <div class="chem-mbti" id="res-worst-mbti">ENFP</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 액션 버튼들 -->
+        <div class="result-actions">
+          <button id="share-btn" class="btn btn-secondary">
+            <span class="btn-icon-label">🔗</span>
+            <span>테스트 결과 링크 복사하기</span>
+          </button>
+          <button id="restart-btn" class="btn btn-primary">
+            <span class="btn-icon-label">🔄</span>
+            <span>테스트 다시 하기</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 토스트 알림 메시지 -->
+  <div id="toast" class="toast" role="alert" aria-live="polite">
+    <span class="toast-icon">✨</span>
+    <span id="toast-message">클립보드에 결과 링크가 복사되었습니다!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
